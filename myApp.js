@@ -4,6 +4,11 @@ var app = express();
 
 console.log("Hello World");
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  next();
+});
+
 app.get("/", function (req, res) {
   let absolutePath = __dirname + "/views/index.html";
   //   res.send("Hello Express");
@@ -13,9 +18,10 @@ app.get("/", function (req, res) {
 app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/json", function (req, res) {
-  if ((process.env.MESSAGE_STYLE === "uppercase")) {
+  if (process.env.MESSAGE_STYLE === "uppercase") {
     res.json({ message: "HELLO JSON" });
-  } if ((process.env.MESSAGE_STYLE !== "uppercase")) {
+  }
+  if (process.env.MESSAGE_STYLE !== "uppercase") {
     res.json({ message: "Hello json" });
   }
 });
