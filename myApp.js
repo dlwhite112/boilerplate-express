@@ -22,12 +22,15 @@ app.get(
   }
 );
 
-app.get(
-  "/:word/echo",
-  (req, res) => {
-    res.send({echo: req.params.word});
-  }
-);
+app.get("/name", (req, res) => {
+  let firstName = req.query.first;
+  let lastName = req.query.last;
+  res.json({ name: `${firstName} ${lastName}` });
+});
+
+app.get("/:word/echo", (req, res) => {
+  res.send({ echo: req.params.word });
+});
 
 app.get("/", function (req, res) {
   let absolutePath = __dirname + "/views/index.html";
