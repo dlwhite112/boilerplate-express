@@ -17,8 +17,15 @@ app.get(
   },
   (req, res) => {
     res.send({
-      time: req.time
+      time: req.time,
     });
+  }
+);
+
+app.get(
+  "/:word/echo",
+  (req, res) => {
+    res.send({echo: req.params.word});
   }
 );
 
